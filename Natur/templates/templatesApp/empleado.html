@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sección de Pedidos - Empleados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff; /* celeste claro */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: #1565c0;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #e3f2fd; /* celeste más claro */
+        }
+
+        tr:hover {
+            background: #bbdefb;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pedidos Registrados</h2>
+    <table>
+        <tr>
+            <th>ID Pedido</th>
+            <th>Cliente</th>
+            <th>Dirección</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Juan Pérez</td>
+            <td>Av. Los Andes 123</td>
+            <td>2 bidones</td>
+            <td>Pendiente</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>María López</td>
+            <td>Calle Cordillera 45</td>
+            <td>1 bidón</td>
+            <td>Entregado</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Carlos Sánchez</td>
+            <td>Ruta 7 km 15</td>
+            <td>3 bidones</td>
+            <td>En camino</td>
+        </tr>
+    </table>
+</body>
+</html>

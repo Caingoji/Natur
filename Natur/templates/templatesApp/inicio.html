@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nature Andes - Inicio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5fff5;
+            text-align: center;
+        }
+
+        header {
+            background: #0fbdc9;
+            color: white;
+            padding: 20px 0;
+        }
+
+        img.logo {
+            margin-top: 40px;
+            width: 250px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #3f2dc8;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 24px;
+            background: #ffffff;
+            color: white;
+            font-size: 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>Nature Andes</h2>
+    </header>
+
+    <img src="{% static 'img/images.png' %}" alt="Logo Nature Andes" class="logo">
+
+    <h1>Bienvenido a la página de Nature Andes</h1>
+
+    <a href="#" class="btn">Entrar al menú</a>
+</body>
+</html>

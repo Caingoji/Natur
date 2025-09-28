@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sección de Pedidos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .pedido-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #1565c0; /* azul */
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #1565c0;
+            text-align: left;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #90caf9; 
+            border-radius: 8px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #1565c0;
+            box-shadow: 0 0 5px #64b5f6;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px;
+            background: #1565c0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #0d47a1; 
+        }
+    </style>
+</head>
+<body>
+    <div class="pedido-container">
+        <h2>Ingrese los datos para su pedido</h2>
+        <form>
+            <label>Nombre:</label>
+            <input type="text" required>
+
+            <label>Número:</label>
+            <input type="text" required>
+
+            <label>Calle:</label>
+            <input type="text" required>
+
+            <label>Cantidad de bidones:</label>
+            <input type="number" min="1" required>
+
+            <button type="submit">Confirmar Pedido</button>
+        </form>
+    </div>
+</body>
+</html>
