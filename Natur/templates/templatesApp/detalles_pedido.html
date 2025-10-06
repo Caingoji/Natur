@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Pedido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff; 
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #92c5ff;
+            margin: 20px 0;
+        }
+
+        .estados {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .card {
+            width: 250px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            color: white;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .espera {
+            background: #f82020;
+        }
+
+        .camino {
+            background: #fffb00; 
+        }
+
+        .llegado {
+            background: #66bb6a; 
+        }
+    </style>
+</head>
+<body>
+    <h2>Estado de su Pedido</h2>
+
+    <div class="estados">
+        <div class="card espera">
+            <p>Pedido en espera</p>
+        </div>
+
+        <div class="card camino">
+            <p>Pedido en camino</p>
+        </div>
+
+        <div class="card llegado">
+            <p>Pedido entregado</p>
+        </div>
+    </div>
+</body>
+</html>

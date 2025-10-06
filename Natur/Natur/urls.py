@@ -16,15 +16,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from NaturApp import views
 from NaturApp.views import infoUsuario
 from NaturApp.views import inicio
-from NaturApp.views import Mpedidos
+from NaturApp.views import menu_pedidos
 from NaturApp.views import empleados
+from NaturApp.views import detalles_pedido
+from NaturApp.views import pedido_empleado
+from NaturApp.views import pedido_confirmado
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('info/',infoUsuario),
     path('inicio/',inicio),
-    path('Mpedidos/',Mpedidos),
+    path('menu_pedidos/', views.menu_pedidos, name='menu_pedidos'),
+    path('pedido_confirmado/', views.pedido_confirmado, name='pedido_confirmado'),
     path('empleado/',empleados),
+    path('pedido_empleado/',views.pedido_empleado, name='pedido_empleado'),
+    path('pedido/', detalles_pedido)
 ]

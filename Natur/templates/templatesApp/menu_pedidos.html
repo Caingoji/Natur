@@ -75,20 +75,11 @@
 <body>
     <div class="pedido-container">
         <h2>Ingrese los datos para su pedido</h2>
-        <form>
-            <label>Nombre:</label>
-            <input type="text" required>
-
-            <label>Número:</label>
-            <input type="text" required>
-
-            <label>Calle:</label>
-            <input type="text" required>
-
-            <label>Cantidad de bidones:</label>
-            <input type="number" min="1" required>
-
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
             <button type="submit">Confirmar Pedido</button>
+            <a href="/confirmar_pedido"></a>
         </form>
     </div>
 </body>
