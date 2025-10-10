@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+    <h2>Iniciar Sesión</h2>
+    {% if error %}
+        <p style="color:red;">{{ error }}</p>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Correo: <input type="email" name="correo" required></p>
+        <p>Contraseña: <input type="password" name="contrasena" required></p>
+        <button type="submit">Ingresar</button>
+    </form>
+    <a href="/registro_cliente/">Registrarse como cliente</a><br>
+    <a href="/registro_empleado/">Registrarse como empleado</a>
+</body>
+</html>

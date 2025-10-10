@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registro de Empleado</title>
+</head>
+<body>
+    <h2>Registrar Empleado</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Registrar</button>
+    </form>
+    <a href="/login_empleado/">¿Ya tienes cuenta? Inicia sesión</a>
+</body>
+</html>

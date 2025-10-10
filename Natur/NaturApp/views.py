@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
-
+from .models import Pedido
 from .forms import PedidoForm
-from .forms import pedidoFomrE
+from .forms import PedidoEmpleadoForm
+from .forms import EmpleadoForm
+from .forms import ClienteForm
+from .models import Empleado,Cliente
 
 def infoUsuario(request):
     Data= { "Id":"123",
@@ -13,6 +16,16 @@ def infoUsuario(request):
 
 def inicio(request):
     return render(request, 'templatesApp/inicio.html')
+
+def registrar_cliente(request):
+    if request.method == 'POST':
+        form = ClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = ClienteForm()
+    return render(request, 'templatesApp/registro_cliente.html', {'form': form})
 
 def menu_pedidos(request):
     if request.method == 'POST':
@@ -30,12 +43,44 @@ def pedido_confirmado(request):
     return render(request, 'templatesApp/confirmar_pedido.html')
 
 
-def empleados(request):
-    return render(request, 'templatesApp/empleado.html')
+def lista_pedidos(request):
+    pedidos = Pedido.objects.all()
+    return render(request, 'templatesApp/lista_pedidos.html', {'pedidos': pedidos})
+
+def eliminarPedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    pedido.delete()
+    return redirect('/lista_pedidos')
+
+def actualizarPedido(request, id):
+    pedido = Pedido.objects.get(id=id)
+    form = PedidoForm(instance=pedido)
+
+    if request.method == 'POST':
+        form = PedidoForm(request.POST, instance=pedido)
+        if form.is_valid():
+            form.save()
+            return redirect('/lista_pedidos')
+
+    data = {'form': form}
+    return render(request, 'templatesApp/editar_pedido_empleado.html', data)
+
+
+
+def registrar_empleado(request):
+    if request.method == 'POST':
+        form = EmpleadoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login') 
+    else:
+        form = EmpleadoForm()
+    return render(request, 'templatesApp/registro_empleado.html', {'form': form})
+
 
 def pedido_empleado(request):
     if request.method == 'POST':
-        form = pedidoFomrE(request.POST)
+        form = pedido_empleado(request.POST)
         if form.is_valid():
             form.save()
             return redirect('lista_pedidos')  
@@ -43,5 +88,46 @@ def pedido_empleado(request):
         form = PedidoForm()
     return render(request, 'templatesApp/pedido_empleado.html', {'form': form})
 
+
 def detalles_pedido(request):
-    return render(request, 'templatesApp/detalles_pedido.html')
+  pedido = Pedido.objects.order_by('fecha_creacion').first()
+  return render(request, 'templatesApp/detalles_pedido.html', {'pedido': pedido})
+
+
+def login(request):
+    error = None
+
+    if request.method == 'POST':
+        correo = request.POST.get('correo')
+        contrasena = request.POST.get('contrasena')
+
+        empleado = Empleado.objects.filter(correo=correo, contrasena=contrasena).first()
+        if empleado:
+            request.session['usuario_id'] = empleado.id
+            request.session['usuario_tipo'] = 'empleado'
+            return redirect('menu_empleado')
+
+        cliente = Cliente.objects.filter(correo=correo, contrasena=contrasena).first()
+        if cliente:
+            request.session['usuario_id'] = cliente.id
+            request.session['usuario_tipo'] = 'cliente'
+            return redirect('menu_cliente')
+
+        error = "Correo o contraseña incorrectos"
+
+    return render(request, 'templatesApp/login_universal.html', {'error': error})
+
+def menu_empleado(request):
+    if request.session.get('usuario_tipo') != 'empleado':
+        return redirect('login')
+    return render(request, 'templatesApp/menu_empleado.html')
+
+
+def menu_cliente(request):
+    if request.session.get('usuario_tipo') != 'cliente':
+        return redirect('login')
+    return render(request, 'templatesApp/menu_cliente.html')
+
+def logout(request):
+    request.session.flush()
+    return redirect('login')

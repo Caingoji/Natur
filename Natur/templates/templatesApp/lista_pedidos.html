@@ -1,3 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos de Clientes</title>
+</head>
+<body>
+    <h2>Lista de pedidos</h2>
 
+    <table border="1" cellpadding="8">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Número</th>
+            <th>Calle</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.nombre }}</td>
+            <td>{{ pedido.numero }}</td>
+            <td>{{ pedido.calle }}</td>
+            <td>{{ pedido.cantidad_bidones }}</td>
+            <td>{{ pedido.estado }}</td>
+            <td>
+                <a href="{% url 'actualizarPedido' pedido.id %}">Editar</a> |
+                <a href="{% url 'eliminarPedido' pedido.id %}">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/menu_empleado/">Volver</a>
+</body>
+</html>
+x|

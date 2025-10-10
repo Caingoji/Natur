@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú del Cliente</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            color: #0d47a1;
+        }
+
+        header {
+            background-color: #0fbdc9;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            width: 100px;
+            border-radius: 10px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        main {
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .menu-btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            background-color: #0fbdc9;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .menu-btn:hover {
+            background-color: #0d47a1;
+        }
+
+        footer {
+            margin-top: 380px;
+            color: #1565c0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{% static 'img/images.png' %}" alt="Logo Nature Andes" class="logo">
+        <div class="title">Menú del Cliente</div>
+    </header>
+
+    <main>
+        <h2>Bienvenido al sistema, cliente</h2>
+        <a href="/menu_pedidos/" class="menu-btn">Realizar pedido</a>
+        <a href="/detalles_pedido/" class="menu-btn">Ver detalles del pedido</a>
+        <a href="/logout/" class="menu-btn">Cerrar sesión</a>
+    </main>
+
+    <footer>
+        <p>Nature Andes © 2025</p>
+    </footer>
+</body>
+</html>

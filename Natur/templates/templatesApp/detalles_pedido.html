@@ -14,8 +14,14 @@
 
         h2 {
             text-align: center;
-            color: #92c5ff;
+            color: #1565c0;
             margin: 20px 0;
+        }
+
+        .info {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0d47a1;
         }
 
         .estados {
@@ -33,36 +39,47 @@
             color: white;
             text-align: center;
             font-weight: bold;
+            opacity: 0.5;
+            transition: 0.3s;
         }
 
-        .espera {
-            background: #f82020;
+        .activo {
+            opacity: 1;
+            transform: scale(1.05);
         }
 
-        .camino {
-            background: #fffb00; 
-        }
+        .espera { background: #f82020; }
+        .camino { background: #fffb00; color: #333; }
+        .llegado { background: #66bb6a; }
 
-        .llegado {
-            background: #66bb6a; 
-        }
     </style>
 </head>
 <body>
     <h2>Estado de su Pedido</h2>
 
+    {% if pedido %}
+    <div class="info">
+        <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
+        <p><strong>Cantidad:</strong> {{ pedido.cantidad }} bidones</p>
+        <p><strong>Estado actual:</strong> {{ pedido.get_estado_display }}</p>
+    </div>
+
     <div class="estados">
-        <div class="card espera">
+        <div class="card espera {% if pedido.estado == 'espera' %}activo{% endif %}">
             <p>Pedido en espera</p>
         </div>
 
-        <div class="card camino">
+        <div class="card camino {% if pedido.estado == 'camino' %}activo{% endif %}">
             <p>Pedido en camino</p>
         </div>
 
-        <div class="card llegado">
+        <div class="card llegado {% if pedido.estado == 'entregado' %}activo{% endif %}">
             <p>Pedido entregado</p>
         </div>
     </div>
+
+    {% else %}
+        <p style="text-align:center; color:red;">Aún no ha realizado ningún pedido.</p>
+    {% endif %}
 </body>
 </html>
