@@ -15,8 +15,14 @@ class ClienteForm(forms.ModelForm):
 
 class PedidoForm(forms.ModelForm):
     class Meta:
-        model=Pedido
-        fields=('nombre','numero','calle','cantidad_bidones')
+        model = Pedido
+        fields = ('nombre', 'numero', 'calle', 'cantidad_bidones')
+
+    def clean_numero(self):
+        numero = self.cleaned_data.get('numero')
+        if not numero.isdigit():
+            raise forms.ValidationError("El número debe contener solo dígitos.")
+        return numero
 
 
 class PedidoEmpleadoForm(forms.ModelForm):

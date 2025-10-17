@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.exceptions import ValidationError
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=100)
@@ -13,21 +13,24 @@ class Cliente(models.Model):
 
 
 class Pedido(models.Model):
-    nombre= models.CharField(max_length=25)
-    numero=models.CharField(max_length=25)
-    calle=models.CharField(max_length=50)
-    cantidad_bidones=models.IntegerField()
-
-    fecha_creacion=models.DateTimeField(auto_now_add=True)
-    estado=models.CharField(
+    nombre = models.CharField(max_length=25)
+    numero = models.CharField(max_length=25)
+    calle = models.CharField(max_length=50)
+    cantidad_bidones = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    estado = models.CharField(
         max_length=30,
         default='espera',
         choices=[
-            ('en espera','en espera'),
-            ('en camino','en camino'),
+            ('en espera', 'en espera'),
+            ('en camino', 'en camino'),
             ('entregado', 'entregado')
         ]
     )
+
+    def clean(self):
+        if self.cantidad_bidones <= 0:
+            raise ValidationError("La cantidad de bidones debe ser mayor que 0")
 
     def __str__(self):
         return f"{self.nombre}-{self.estado}"

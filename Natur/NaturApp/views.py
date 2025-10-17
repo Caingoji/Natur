@@ -1,4 +1,5 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
 from .models import Pedido
 from .forms import PedidoForm
 from .forms import PedidoEmpleadoForm
@@ -14,28 +15,34 @@ def infoUsuario(request):
             "Correo":"superman@sm.gmail"}
     return render(request, 'templatesApp/Index.html',Data)
 
-def inicio(request):
-    return render(request, 'templatesApp/inicio.html')
+def base(request):
+    return render(request, 'templatesApp/base.html')
 
 def registrar_cliente(request):
     if request.method == 'POST':
         form = ClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            messages.success(request, "Cliente registrado correctamente.")
+            return redirect('login_universal')
+        else:
+            messages.error(request, "Ocurrió un error. Revisa los datos ingresados.")
     else:
         form = ClienteForm()
     return render(request, 'templatesApp/registro_cliente.html', {'form': form})
+
 
 def menu_pedidos(request):
     if request.method == 'POST':
         form = PedidoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('pedido_confirmado')  
+            messages.success(request, "Pedido realizado con éxito.")
+            return redirect('pedido_confirmado')
+        else:
+            messages.error(request, "Hubo un error con tu pedido. Inténtalo nuevamente.")
     else:
         form = PedidoForm()
-
     return render(request, 'templatesApp/menu_pedidos.html', {'form': form})
 
 
@@ -86,12 +93,13 @@ def pedido_empleado(request):
             return redirect('lista_pedidos')  
     else:
         form = PedidoForm()
-    return render(request, 'templatesApp/pedido_empleado.html', {'form': form})
+    return render(request, 'templatesApp/detalles_pedido.html', {'pedido': PedidoEmpleadoForm})
+
 
 
 def detalles_pedido(request):
-  pedido = Pedido.objects.order_by('fecha_creacion').first()
-  return render(request, 'templatesApp/detalles_pedido.html', {'pedido': pedido})
+    pedido = Pedido.objects.last() 
+    return render(request, 'templatesApp/detalles_pedido.html', {'pedido': pedido})
 
 
 def login(request):

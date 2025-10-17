@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from NaturApp import views
 from NaturApp.views import infoUsuario
-from NaturApp.views import inicio
+from NaturApp.views import base
 from NaturApp.views import menu_pedidos
 from NaturApp.views import lista_pedidos
 from NaturApp.views import detalles_pedido
@@ -36,7 +36,7 @@ from NaturApp.views import actualizarPedido
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('info/',infoUsuario),
-    path('',views.inicio, name="inicio"),
+    path('',views.base, name="inicio"),
     path('login/', views.login, name='login'),
     path('registro_cliente/', views.registrar_cliente, name='registro_cliente'),
     path('menu_pedidos/', views.menu_pedidos, name='menu_pedidos'),

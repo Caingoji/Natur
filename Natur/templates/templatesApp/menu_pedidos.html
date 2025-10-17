@@ -26,7 +26,7 @@
         }
 
         h2 {
-            color: #1565c0; /* azul */
+            color: #1565c0;
             margin-bottom: 20px;
         }
 
@@ -70,16 +70,45 @@
         button:hover {
             background: #0d47a1; 
         }
+
+        .mensaje {
+            background-color: #e3f2fd;
+            border: 1px solid #1565c0;
+            color: #0d47a1;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .error {
+            background-color: #ffebee;
+            border: 1px solid #d32f2f;
+            color: #b71c1c;
+        }
     </style>
 </head>
 <body>
     <div class="pedido-container">
         <h2>Ingrese los datos para su pedido</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'error' in message.tags %}
+                    <div class="mensaje error">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+
         <form method="post">
             {% csrf_token %}
-            {{ form.as_p}}
+            {{ form.as_p }}
             <button type="submit">Confirmar Pedido</button>
-            <a href="/confirmar_pedido"></a>
+            <a href="/confirmar_pedido/"></a>
         </form>
     </div>
 </body>

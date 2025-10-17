@@ -59,23 +59,31 @@
 
     {% if pedido %}
     <div class="info">
-        <p><strong>Dirección:</strong> {{ pedido.direccion }}</p>
-        <p><strong>Cantidad:</strong> {{ pedido.cantidad }} bidones</p>
-        <p><strong>Estado actual:</strong> {{ pedido.get_estado_display }}</p>
+        <p><strong>Dirección:</strong> {{ pedido.calle }}</p>
+        <p><strong>Cantidad:</strong> {{ pedido.cantidad_bidones }} bidones</p>
+        <p><strong>Estado actual:</strong> {{ pedido.estado }}</p>
     </div>
 
     <div class="estados">
-        <div class="card espera {% if pedido.estado == 'espera' %}activo{% endif %}">
+        <div class="card espera {% if pedido.estado == 'en espera' %}activo{% endif %}">
             <p>Pedido en espera</p>
         </div>
 
-        <div class="card camino {% if pedido.estado == 'camino' %}activo{% endif %}">
+        <div class="card camino {% if pedido.estado == 'en camino' %}activo{% endif %}">
             <p>Pedido en camino</p>
         </div>
 
         <div class="card llegado {% if pedido.estado == 'entregado' %}activo{% endif %}">
             <p>Pedido entregado</p>
         </div>
+
+    <div style="text-align: center; margin-top: 30px;">
+    <a href="{% url 'menu_cliente' %}" 
+       style="background-color: #1565c0; color: white; 
+              padding: 10px 25px; border-radius: 8px; 
+              text-decoration: none; font-weight: bold;">
+        Volver al Menú Principal
+    </a>
     </div>
 
     {% else %}
