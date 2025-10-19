@@ -4,87 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles del Pedido</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f8ff; 
-            margin: 0;
-            padding: 0;
-        }
-
-        h2 {
-            text-align: center;
-            color: #1565c0;
-            margin: 20px 0;
-        }
-
-        .info {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #0d47a1;
-        }
-
-        .estados {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-        }
-
-        .card {
-            width: 250px;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            opacity: 0.5;
-            transition: 0.3s;
-        }
-
-        .activo {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .espera { background: #f82020; }
-        .camino { background: #fffb00; color: #333; }
-        .llegado { background: #66bb6a; }
-
-    </style>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
-<body>
+<body class="main-center">
     <h2>Estado de su Pedido</h2>
 
     {% if pedido %}
     <div class="info">
         <p><strong>Dirección:</strong> {{ pedido.calle }}</p>
         <p><strong>Cantidad:</strong> {{ pedido.cantidad_bidones }} bidones</p>
-        <p><strong>Estado actual:</strong> {{ pedido.estado }}</p>
+        <p><strong>Estado actual:</strong> {{ pedido.get_estado_display }}</p>
     </div>
 
     <div class="estados">
-        <div class="card espera {% if pedido.estado == 'en espera' %}activo{% endif %}">
+        <div class="card espera {% if pedido.estado == 'espera' %}activo{% endif %}">
             <p>Pedido en espera</p>
         </div>
 
-        <div class="card camino {% if pedido.estado == 'en camino' %}activo{% endif %}">
+        <div class="card camino {% if pedido.estado == 'camino' %}activo{% endif %}">
             <p>Pedido en camino</p>
         </div>
 
-        <div class="card llegado {% if pedido.estado == 'entregado' %}activo{% endif %}">
+        <div class="card entregado {% if pedido.estado == 'entregado' %}activo{% endif %}">
             <p>Pedido entregado</p>
         </div>
-
-    <div style="text-align: center; margin-top: 30px;">
-    <a href="{% url 'menu_cliente' %}" 
-       style="background-color: #1565c0; color: white; 
-              padding: 10px 25px; border-radius: 8px; 
-              text-decoration: none; font-weight: bold;">
-        Volver al Menú Principal
-    </a>
     </div>
+
+    <a href="/menu_cliente" class="btn-volver">Volver al menú</a>
 
     {% else %}
         <p style="text-align:center; color:red;">Aún no ha realizado ningún pedido.</p>

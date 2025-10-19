@@ -1,21 +1,33 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
-<body>
+<body class="main-center">
+    <img src="{% static 'img/images.png' %}" alt="Logo" class="logo">
     <h2>Iniciar Sesión</h2>
+
     {% if error %}
-        <p style="color:red;">{{ error }}</p>
+        <p class="mensaje error">{{ error }}</p>
     {% endif %}
+
     <form method="post">
         {% csrf_token %}
-        <p>Correo: <input type="email" name="correo" required></p>
-        <p>Contraseña: <input type="password" name="contrasena" required></p>
-        <button type="submit">Ingresar</button>
+        <label for="correo">Correo:</label>
+        <input type="email" id="correo" name="correo" required>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+
+        <button type="submit" class="btn">Ingresar</button>
     </form>
-    <a href="/registro_cliente/">Registrarse como cliente</a><br>
-    <a href="/registro_empleado/">Registrarse como empleado</a>
+
+    <div class="registro-links">
+        <a href="/registro_cliente/" class="btn btn-secundario">Registrarse como cliente</a>
+        <a href="/registro_empleado/" class="btn btn-secundario">Registrarse como empleado</a>
+    </div>
 </body>
 </html>

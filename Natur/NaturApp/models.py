@@ -22,9 +22,9 @@ class Pedido(models.Model):
         max_length=30,
         default='espera',
         choices=[
-            ('en espera', 'en espera'),
-            ('en camino', 'en camino'),
-            ('entregado', 'entregado')
+            ('espera', 'En espera'),
+            ('camino', 'En camino'),
+            ('entregado', 'Entregado')
         ]
     )
 
@@ -44,13 +44,13 @@ class Pedido_Empleado(models.Model):
 
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     estado = models.CharField(
-        max_length=20,
+        max_length=30,
+        default='espera',
         choices=[
             ('espera', 'En espera'),
             ('camino', 'En camino'),
             ('entregado', 'Entregado')
-        ],
-        default='espera'
+        ]
     )
 
     def __str__(self):
